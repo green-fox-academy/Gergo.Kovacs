@@ -23,6 +23,7 @@
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
+.idea/
 
 # Gradle
 .idea/**/gradle.xml
@@ -81,4 +82,3 @@ fabric.properties
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/clion
-.idea/
