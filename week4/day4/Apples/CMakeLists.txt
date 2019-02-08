@@ -1,47 +1,28 @@
-cmake_minimum_required(VERSION 3.13)
-project(Apples)
+cmake_minimum_required(VERSION 3.12)
 
+# Change this to the name of the directory that contains your code
+set(PROJECT_LIB_NAME Apples_Lib)
+
+# Change this to the name of the directory that contains your tests
+set(PROJECT_TESTS_NAME Apples_Tests)
+
+# Change this to the path where you extracted the Google Test files to
+set(PATH_TO_GOOGLETEST "/Users/kovacsek/greenfox/googletest")
+
+# Change this to your project name (optional)
+set(PROJECT_NAME MyApp)
+
+
+project(${PROJECT_NAME})
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(Apples_Lib)
+# The next line creates an executable file from main.cpp with the same name as your project
+add_executable(${PROJECT_NAME} main.cpp)
 
-add_executable(Apples
-        Apples_Lib/apples.cpp
-        Apples_Lib/apples.h
-        Apples_Lib/CMakeLists.txt
-        Apples_Tests/apples_test.cpp
-        Apples_Tests/CMakeLists.txt
-        cmake-build-debug/Apples_lib/cmake_install.cmake
-        cmake-build-debug/Apples_lib/libApples_lib.a
-        cmake-build-debug/Apples_lib/Makefile
-        cmake-build-debug/Apples_Tests/googletest/googlemock/gtest/generated/gmock.pc
-        cmake-build-debug/Apples_Tests/googletest/googlemock/gtest/generated/gmock_main.pc
-        cmake-build-debug/Apples_Tests/googletest/googlemock/gtest/generated/gtest.pc
-        cmake-build-debug/Apples_Tests/googletest/googlemock/gtest/generated/gtest_main.pc
-        cmake-build-debug/Apples_Tests/googletest/googlemock/gtest/generated/GTestConfig.cmake
-        cmake-build-debug/Apples_Tests/googletest/googlemock/gtest/generated/GTestConfigVersion.cmake
-        cmake-build-debug/Apples_Tests/googletest/googlemock/gtest/cmake_install.cmake
-        cmake-build-debug/Apples_Tests/googletest/googlemock/gtest/CTestTestfile.cmake
-        cmake-build-debug/Apples_Tests/googletest/googlemock/gtest/gtest.cbp
-        cmake-build-debug/Apples_Tests/googletest/googlemock/gtest/Makefile
-        cmake-build-debug/Apples_Tests/googletest/googlemock/cmake_install.cmake
-        cmake-build-debug/Apples_Tests/googletest/googlemock/CTestTestfile.cmake
-        cmake-build-debug/Apples_Tests/googletest/googlemock/gmock.cbp
-        cmake-build-debug/Apples_Tests/googletest/googlemock/Makefile
-        cmake-build-debug/Apples_Tests/googletest/cmake_install.cmake
-        cmake-build-debug/Apples_Tests/googletest/CTestTestfile.cmake
-        cmake-build-debug/Apples_Tests/googletest/googletest-distribution.cbp
-        cmake-build-debug/Apples_Tests/googletest/Makefile
-        cmake-build-debug/Apples_Tests/Apples_Tests
-        cmake-build-debug/Apples_Tests/cmake_install.cmake
-        cmake-build-debug/Apples_Tests/Makefile
-        cmake-build-debug/lib/libgtest_maind.a
-        cmake-build-debug/lib/libgtestd.a
-        cmake-build-debug/Apples.cbp
-        cmake-build-debug/cmake_install.cmake
-        cmake-build-debug/CMakeCache.txt
-        cmake-build-debug/Makefile
-        cmake-build-debug/MyApp
-        cmake-build-debug/MyApp.cbp
-        CMakeLists.txt
-        main.cpp)
+# This block includes the subdirectories containing your code and tests
+include_directories(${PROJECT_LIB_NAME})
+add_subdirectory(${PROJECT_LIB_NAME})
+add_subdirectory(${PROJECT_TESTS_NAME})
+
+# This line links your code to the main executable
+target_link_libraries(${PROJECT_NAME} ${PROJECT_LIB_NAME})

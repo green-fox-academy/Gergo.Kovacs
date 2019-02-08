@@ -2,11 +2,12 @@
 #define APPLES_APPLES_H
 #include <string>
 #include <iostream>
+#include <vector>
 
 class Apples
 {
-
+ public:
+  std::string getApple();
+  int sum(std::vector<int> numbers);
 };
-std::string getApple();
-
 #endif //APPLES_APPLES_H
