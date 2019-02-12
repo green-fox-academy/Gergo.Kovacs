@@ -2,11 +2,12 @@
 #include <SDL.h>
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 648;
+const int SCREEN_HEIGHT = 648;
 
 //Draws geometry on the canvas
 void draw();
+
 
 //Starts up SDL and creates window
 bool init();
@@ -24,37 +25,28 @@ void draw()
 {
 
 
-    int x= 10;
-
-    int size = 10;
-
-    int size2 = 10;
-    for (int i =0; i<5; i++) {
-        //choose color
-        SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
-        //create a rectangle
-        SDL_Rect fillRect = {x, x, size, size};
-        //draw rectangle
-        SDL_RenderFillRect(gRenderer, &fillRect);
 
 
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
-        //create a rectangle
-        SDL_Rect drawRect = {x, x, size+1, size+1};
-        //draw rectangle
-        SDL_RenderDrawRect(gRenderer, &drawRect);
+
+    //
+    SDL_SetRenderDrawColor(gRenderer, 0x00 /*R*/, 0x00 /*G*/, 0x00 /*B*/, 0x00 /*A*/);
+
+    SDL_RenderDrawLine(gRenderer, 648, 648, 324, 0);
 
 
-        x = x+size;
+    //
+    SDL_SetRenderDrawColor(gRenderer, 0x00 /*R*/, 0x00 /*G*/, 0x00 /*B*/, 0x00 /*A*/);
 
-        size = size2+size;
+    SDL_RenderDrawLine(gRenderer, 0, 648, 324, 0);
 
+
+
+    SDL_SetRenderDrawColor(gRenderer, 0x00 /*R*/, 0x00 /*G*/, 0x00 /*B*/, 0xFF /*A*/);
+
+    SDL_RenderDrawLine(gRenderer, 0, 648, 648, 648);
     }
 
-    // Reproduce this:
-    // [https://github.com/green-fox-academy/teaching-materials/blob/master/workshop/drawing/purple-steps-3d/r4.png]
-    // Pay attention for the outlines as well
-}
+
 
 bool init()
 {
@@ -66,7 +58,7 @@ bool init()
     }
 
     //Create window
-    gWindow = SDL_CreateWindow( "Purple steps 3D", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+    gWindow = SDL_CreateWindow( "Line in the middle", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
     if( gWindow == nullptr )
     {
         std::cout << "Window could not be created! SDL Error: " << SDL_GetError() << std::endl;
