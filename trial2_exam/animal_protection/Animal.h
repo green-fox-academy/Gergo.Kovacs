@@ -1,13 +1,15 @@
-//
-// Created by Kovacs család on 2019-02-11.
-//
-
 #ifndef ANIMAL_PROTECTION_ANIMAL_H
 #define ANIMAL_PROTECTION_ANIMAL_H
+#include <iostream>
 
 class Animal
 {
-
+ public:
+  Animal();
+  Animal(std::string name);
+  std::string toString();
+ private:
+  std::string _name;
 };
 
 #endif //ANIMAL_PROTECTION_ANIMAL_H

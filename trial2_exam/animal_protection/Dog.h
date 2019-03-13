@@ -1,13 +1,11 @@
-//
-// Created by Kovacs család on 2019-02-11.
-//
-
 #ifndef ANIMAL_PROTECTION_DOG_H
 #define ANIMAL_PROTECTION_DOG_H
+#include "Animal.h"
 
-class Dog
+class Dog : public Animal
 {
-
+ public:
+Dog(std::string name);
 };
 
 #endif //ANIMAL_PROTECTION_DOG_H

@@ -1,4 +1,6 @@
-//
-// Created by Kovacs család on 2019-02-08.
-//
+#include <iostream>
+#include <gtest/gtest.h>
+#include "anagram.h"
+
+
 

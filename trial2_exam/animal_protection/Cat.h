@@ -1,13 +1,11 @@
-//
-// Created by Kovacs család on 2019-02-11.
-//
 
 #ifndef ANIMAL_PROTECTION_CAT_H
 #define ANIMAL_PROTECTION_CAT_H
-
-class Cat
+#include "Animal.h"
+class Cat : Animal
 {
-
+ public:
+    Cat(std::string name= "cat");
 };
 
 #endif //ANIMAL_PROTECTION_CAT_H

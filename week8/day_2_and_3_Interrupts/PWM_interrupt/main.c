@@ -13,8 +13,9 @@
 #include "stm32746g_discovery.h"
 
 
-GPIO_InitTypeDef led;
-TIM_HandleTypeDef pwm_handle;
+GPIO_InitTypeDef user_button_handle;
+TIM_HandleTypeDef pwm;
+
 TIM_OC_InitTypeDef s_config; //PWM channel
 
 static void Error_Handler(void);
@@ -30,30 +31,30 @@ void init_user_button(void)
 	user_button_handle.Speed = GPIO_SPEED_FAST;
 	user_button_handle.Mode =GPIO_MODE_IT_RISING;
 
-	HAL_GPIO_Init(GPIOF, &led);
+	HAL_GPIO_Init(GPIOI, &user_button_handle);
 }
 
 void init_timer_pwm(void)
 {
 	__HAL_RCC_TIM1_CLK_ENABLE();
 
-	HAL_TIM_Base_DeInit(&timer_handle);
-	__HAL_TIM_SET_COUNTER(&timer_handle, 0);
+	HAL_TIM_Base_DeInit(&pwm);
+	__HAL_TIM_SET_COUNTER(&pwm, 0);
 
-	pwm_handle.Instance = TIM2;
-	pwm_handle.Init.Prescaler = 10800 - 1; //0,1 ms
-	pwm_handle.Init.Period = 5000 - 1; //0.5 s period
-	pwm_handle.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-	pwm_handle.Init.CounterMode = TIM_COUNTERMODE_UP;
+	pwm.Instance = TIM2;
+	pwm.Init.Prescaler = 10800 - 1; //0,1 ms
+	pwm.Init.Period = 5000 - 1; //0.5 s period
+	pwm.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	pwm.Init.CounterMode = TIM_COUNTERMODE_UP;
 
-	HAl_TIM_PWM_Init(&pwm_handle);
+	HAl_TIM_PWM_Init(&pwm);
 
 	s_config.Pulse = 50;
 	s_config.OCMode = TIM_OCMODE_PWM1;
 	s_config.OCPolarity = TIM_OCPOLARITY_HIGH;
 	s_config.OCFastMode = TIM_OCFAST_ENABLE;
 
-	HAL_TIM_PWM_ConfigChannel(&pwm_handle, &s_config, TIM_CHANNEL_1);
+	HAL_TIM_PWM_ConfigChannel(&pwm, &s_config, TIM_CHANNEL_1);
 
 	HAL_NVIC_SetPriority(TIM2_IRQn, 1, 0);
 	HAL_NVIC_EnableIRQ(TIM2_IRQn);
@@ -68,7 +69,7 @@ int main(void)
 
 	init_timer_pwm();
 
-	HAL_TIM_PWM_Start_IT(&pwm_handle,TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start_IT(&pwm,TIM_CHANNEL_1);
 
 	while (1) {
 	}
@@ -86,7 +87,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 void TIM2_IRQHandler(void)
 {
-	HAL_TIM_IRQHandler(&pwm_handle);
+	HAL_TIM_IRQHandler(&pwm);
 }
 
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)

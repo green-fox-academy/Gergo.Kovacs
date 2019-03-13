@@ -4,10 +4,11 @@
 
 #ifndef ANIMAL_PROTECTION_PARROT_H
 #define ANIMAL_PROTECTION_PARROT_H
-
-class Parrot
+#include "Animal.h"
+class Parrot : public Animal
 {
-
+ public:
+  Parrot(std::string name = "parrot");
 };
 
 #endif //ANIMAL_PROTECTION_PARROT_H
