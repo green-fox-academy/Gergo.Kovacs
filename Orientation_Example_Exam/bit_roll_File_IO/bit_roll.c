@@ -53,8 +53,8 @@ char *get_conversion(char *filename)
     }
     fclose(file);
 
-    int *text_array;
-    text_array = (int *) malloc(sizeof(int) * size);
+    char *text_array;
+    text_array = (char *) malloc(sizeof(char) * size);
 
     file = fopen(filename, "r");
 
